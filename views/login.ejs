@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <%- include('./partials/login_head') %>
+</head>
+
+<body>
+<div class="login_wrap">
+	<div class="login_pos">
+		<div class="txt_wrap">
+			<h1 class="login_txt1">PLC</h1>
+			<h2 class="login_txt2">PLC 연동 프로그램</h2>
+		</div>
+		<div class="login_box_wrap">
+			<h3>MEMEBERS <span>LOGIN</span></h3>
+			<p class="img_login" ><img src="images/img_login.png" alt="" /></p>
+			<form action="" class="login_form">
+				<fieldset>
+					<legend>로그인 폼</legend>
+					<p><input type="text" placeholder="E-Mail" /></p>
+					<p><input type="password" placeholder="PASSWORD" /></p>
+					<div class="alert_wrap">
+						<p class="fl"><label for="user_save"><input type="checkbox" name="user_save" id="user_save" class="check" />기본정보 저장</label>	</p>
+						<p class="fr alert_txt">비밀번호가 틀렸습니다.</p>
+					</div>
+					<a href="/index" class="btn_login">LOGIN</a>
+					<p class="btn_member"><a href="/join">회원가입</a></p>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+	
+</body>
+</html>

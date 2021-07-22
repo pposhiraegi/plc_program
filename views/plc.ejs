@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <%- include('./partials/head') %>
+</head>
+
+<body>
+<div id="wrap">
+	<header>
+		<div class="inner_wrap">
+			<div class="clear">
+                <h1><span>P</span><span>L</span><span>C</span> Program</h1>
+				<div class="user">
+					<p><span class="icon_user"><i class="fas fa-user i_user"></i></span>홍길동님 로그인하셨습니다.</p>
+					<a href="#" class="btn_login">LOGOUT</a>
+				</div>
+			</div>
+		</div>
+        <%- include('./partials/nav') %>
+		<!-- //주메뉴 -->
+	</header>
+	<section>
+		<div class="inner_wrap">
+			<div class="cont_title_wrap">
+				<h3>PLC 관리</h3>
+				<p><span class="location_home">홈</span><span class="location_arrow">PLC</span><span>PLC 관리</span></p>
+			</div>
+		</div>
+		<!-- 버튼 -->
+		<div class="btn_area">
+			<div class="inner_wrap" >
+				<a href="#popup1" rel="modal:open" class="btn_dark_blue btn_lg">PLC 등록</a>
+				<a href="#popup2" rel="modal:open" class="btn_dark_blue btn_lg">가상 PLC 등록</a>
+				<a href="#popup2" rel="modal:open" class="btn_blue">수정</a>
+				<a href="#" class="btn_dark_gray">삭제</a>
+			</div>
+		</div>
+		<!-- //버튼 -->
+		<!-- 테이블 -->
+		<div class="table_wrap">
+			<div class="inner_wrap">
+				<div class="scroll">
+					<form method="get" action="">
+                        <legend>PLC 관리 리스트 폼</legend>
+					    <fieldset>
+					        <table summary="" class="tb_style_01">
+					            <caption></caption>
+					            <colgroup>
+					                <col style="width:5%;" />
+					                <col style="width:10%;" />
+					                <col style="width:10%;" />
+					                <col style="width:20%;" />
+					                <col style="width:10%;" />
+					                <col style="width:15;" />
+					                <col style="width:10%;" />
+					                <col style="width:auto" />
+					            </colgroup>
+					            <thead>
+					                <tr>
+					                    <th scope="col"><input type="checkbox" name="" value=""></th>
+					                    <th scope="col">PLC</th>
+					                    <th scope="col">국번</th>
+					                    <th scope="col">IP</th>
+					                    <th scope="col">Port</th>
+					                    <th scope="col">Payload</th>
+					                    <th scope="col">Bit/Word</th>
+					                    <th scope="col">Protocol</th>
+					                </tr>
+					            </thead>
+					        </table>
+					    </fieldset>
+					</form>
+				</div>
+				<div class="pagination">
+					<ul>
+						<li class="pg-btn"><a href="#"><img src="images/icon_first.gif" alt="처음 페이지로"></a></li>
+						<li class="pg-btn"><a href="#"><img src="images/icon_prev.gif" alt="이전 페이지로"></a></li>
+						<li class="active"><a href="#">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+						<li><a href="#">4</a></li>
+						<li><a href="#">5</a></li>
+						<li><a href="#">6</a></li>
+						<li><a href="#">7</a></li>
+						<li><a href="#">8</a></li>
+						<li><a href="#">9</a></li>
+						<li><a href="#">10</a></li>
+						<li class="pg-btn"><a href="#"><img src="images/icon_next.gif" alt="다음 페이지로"></a></li>
+						<li class="pg-btn"><a href="#"><img src="images/icon_last.gif" alt="마지막 페이지로"></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<!-- //테이블 -->
+	</section>
+	
+</div>
+<footer>
+	<div class="inner_wrap">
+		<p>Copyright (c) 2021 all Rights reserved. PLC Program</p>
+	</div>
+</footer>
+
+<!-- popup content -->
+<!--PLC 등록 팝업-->
+<div class="modal" id="popup1" style="display:none;">
+	<h3>PLC 등록</h3>
+	<div class="popup_cont">
+		<form method="get" action="">
+            <legend>PLC 등록 폼</legend>
+		    <fieldset>
+		        <table summary="" class="tb_style_modify">
+		            <caption>PLC 등록</caption>
+		            <colgroup>
+		                <col style="width:15%" />
+		                <col style="width:auto" />
+		            </colgroup>
+		            <tbody>
+		                <tr>
+		                    <th scope="row"><label for="">PLC 이름</label></th>
+		                    <td><input type="text" name="" id="" value="" placeholder="PLC 이름" class="text half_wd" /></td>
+		                </tr>	
+		                <tr>
+		                    <th scope="row"><label for="">Ethernet setting</label></th>
+		                    <td>
+                                <div class="column_wrap">
+                                    <p class="column_margin">
+                                        <input type="text" name="" id="" value="" placeholder="드라이버" class="text column2" /> 
+                                        <input type="text" name="" id="" value="" placeholder="통신방식" class="text column2" />
+                                    </p>
+                                    <p class="column_margin">
+                                        <input type="text" name="" id="" value="" placeholder="IP" class="text column2" /> 
+                                        <input type="text" name="" id="" value="" placeholder="PORT" class="text column2" />
+                                    </p>
+                                    <p>
+                                        <input type="text" name="" id="" value="" placeholder="국번" class="text column2" /> 
+                                        <select name="" id="" class="text column2">
+                                            <option value="">Modbus TCP</option>
+                                            <option value="">TCP</option>
+                                        </select>
+                                    </p>
+                                </div>
+		                    </td>
+		                </tr>	
+		                <tr>
+		                    <th scope="row"><label for="">Address</label></th>
+		                    <td>
+		                        <div class="column_wrap">
+                                    <p class="column_margin">
+                                        <select name="" id="" class="text middle_wd">
+                                            <option value="">Read coils (01)</option>
+                                            <option value="">Read discrete inputs(02)</option>
+                                            <option value="">Read holding registers(03)</option>
+                                            <option value="">Read input registers(04)</option>
+                                        </select>
+                                        <input type="text" name="" id="" value="" placeholder="Address" class="text short_wd" /> 
+                                        <input type="text" name="" id="" value="" placeholder="시작 자리 수" class="text short_wd" />
+                                        <input type="text" name="" id="" value="" placeholder="끝 자리 수" class="text short_wd" />
+                                        <input type="text" name="" id="" value="" placeholder="value" class="text short_wd" />
+                                        <a href="#" class="btn_add"><i class="fas fa-plus-square"></i></a>
+						                <a href="#" class="btn_del"><i class="fas fa-minus-square"></i></a>
+                                    </p>
+                                    <p class="column_margin">
+                                        <select name="" id="" class="text middle_wd">
+                                            <option value="">Read coils (01)</option>
+                                            <option value="">Read discrete inputs(02)</option>
+                                            <option value="">Read holding registers(03)</option>
+                                            <option value="">Read input registers(04)</option>
+                                        </select>
+                                        <input type="text" name="" id="" value="" placeholder="Address" class="text short_wd" /> 
+                                        <input type="text" name="" id="" value="" placeholder="시작 자리 수" class="text short_wd" />
+                                        <input type="text" name="" id="" value="" placeholder="끝 자리 수" class="text short_wd" />
+                                        <input type="text" name="" id="" value="" placeholder="value" class="text short_wd" />
+                                    </p>
+                                    <p class="column_margin">
+                                        <select name="" id="" class="text middle_wd">
+                                            <option value="">Read coils (01)</option>
+                                            <option value="">Read discrete inputs(02)</option>
+                                            <option value="">Read holding registers(03)</option>
+                                            <option value="">Read input registers(04)</option>
+                                        </select>
+                                        <input type="text" name="" id="" value="" placeholder="Address" class="text short_wd" /> 
+                                        <input type="text" name="" id="" value="" placeholder="시작 자리 수" class="text short_wd" />
+                                        <input type="text" name="" id="" value="" placeholder="끝 자리 수" class="text short_wd" />
+                                        <input type="text" name="" id="" value="" placeholder="value" class="text short_wd" />
+                                    </p>
+                                </div>
+		                    </td>
+		                </tr>		
+		            </tbody>
+		        </table>
+		    </fieldset>
+		</form>
+		<div class="pop_btn_area">
+			<a href="#" class="btn_pop_blue">등록</a>
+			<a href="#close-modal" rel="modal:close" class="btn_pop_gray">닫기</a>
+		</div>
+	</div>
+	<a href="#close-modal" rel="modal:close" class="close-modal">Close</a>
+</div>
+<!--//PLC 등록 팝업-->
+
+<!--가상 PLC 등록 팝업-->
+<div class="modal" id="popup2" style="display: none;">
+    <h3>가상 PLC 등록</h3>
+	<div class="popup_cont">
+		<form method="get" action="">
+            <legend>가상 PLC 등록 폼</legend>
+		    <fieldset>
+		        <table summary="" class="tb_style_modify">
+		            <caption>PLC 등록</caption>
+		            <colgroup>
+		                <col style="width:15%" />
+		                <col style="width:auto" />
+		            </colgroup>
+		            <tbody>
+		                <tr>
+		                    <th scope="row"><label for="">PLC 이름</label></th>
+		                    <td><input type="text" name="" id="" value="" placeholder="Virtual_plc" class="text half_wd" /></td>
+		                </tr>	
+		                <tr>
+		                    <th scope="row"><label for="">Ethernet setting</label></th>
+		                    <td>
+                                <div class="column_wrap">
+                                    <p class="column_margin">
+                                        <input type="text" name="" id="" value="" placeholder="드라이버" class="text column2" /> 
+                                        <input type="text" name="" id="" value="" placeholder="통신방식" class="text column2" />
+                                    </p>
+                                    <p class="column_margin">
+                                        <input type="text" name="" id="" value="" placeholder="IP" class="text column2" /> 
+                                        <input type="text" name="" id="" value="" placeholder="PORT" class="text column2" />
+                                    </p>
+                                    <p>
+                                        <input type="text" name="" id="" value="" placeholder="국번" class="text column2" /> 
+                                        <select name="" id="" class="text column2">
+                                            <option value="">Modbus TCP</option>
+                                            <option value="">TCP</option>
+                                        </select>
+                                    </p>
+                                </div>
+		                    </td>
+		                </tr>
+		                <tr>
+		                    <th scope="row"><label for="">실제 Value 값 찾기</label></th>
+		                    <td><a href="#popup3" class="btn_pop_sgray">찾기</a></td>
+		                </tr>
+		                <tr>
+		                    <th scope="row"><label for="">Value</label></th>
+		                    <td>
+		                        <div class="column_wrap">
+		                            <p class="column_margin">
+		                                <input type="text" name="" id="" value="" placeholder="수식 ex) 2*Sen(a0001)+Sen(a0031)" class="text wide_wd" /> 
+		                                <a href="#" class="btn_add"><i class="fas fa-plus-square"></i></a>
+		                                <a href="#" class="btn_del"><i class="fas fa-minus-square"></i></a>
+		                            </p>
+		                        </div>
+		                    </td>
+		                </tr>		
+		            </tbody>
+		        </table>
+		    </fieldset>
+		</form>
+		<div class="pop_btn_area">
+			<a href="#" class="btn_pop_blue">등록</a>
+			<a href="#close-modal" rel="modal:close" class="btn_pop_gray">닫기</a>
+		</div>
+	</div>
+	<a href="#close-modal" rel="modal:close" class="close-modal">Close</a>
+</div>
+<!--//가상 PLC 등록 팝업-->
+
+<!--실제 PLC 값 찾기 팝업-->
+<div class="modal short_wd" id="popup3" style="display: none;">
+    <h3>실제 PLC 값 찾기</h3>
+	<div class="popup_cont">
+		<table summary="" class="tb_style_list">
+            <caption>실제 PLC 값 찾기 목록 테이블</caption>
+            <colgroup>
+                <col style="width:20%" />
+                <col style="width:15%" />
+                <col style="width:15%" />
+                <col style="width:15%" />
+                <col style="width:auto" />
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>PLC 명</th>
+                    <th>No</th>
+                    <th>Type</th>
+                    <th>Value</th>
+                    <th>IP</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PLC_A</td>
+                    <td>A0001</td>
+                    <td>Word</td>
+                    <td></td>
+                    <td>192.168.0.2</td>
+                </tr>	
+                <tr>
+                    <td>PLC_B</td>
+                    <td>A0002</td>
+                    <td>Bit</td>
+                    <td></td>
+                    <td>192.168.0.2</td>
+                </tr>
+                <tr>
+                    <td>PLC_C</td>
+                    <td>A0003</td>
+                    <td>Bit</td>
+                    <td></td>
+                    <td>192.168.0.2</td>
+                </tr>
+                <tr>
+                    <td>PLC_D</td>
+                    <td>A0004</td>
+                    <td>Bit</td>
+                    <td></td>
+                    <td>192.168.0.2</td>
+                </tr>
+                <tr>
+                    <td>PLC_E</td>
+                    <td>A0005</td>
+                    <td>Word</td>
+                    <td></td>
+                    <td>192.168.0.2</td>
+                </tr>
+                <tr>
+                    <td>PLC_F</td>
+                    <td>A0006</td>
+                    <td>Word</td>
+                    <td></td>
+                    <td>192.168.0.2</td>
+                </tr>
+                <tr>
+                    <td>PLC_G</td>
+                    <td>A0007</td>
+                    <td>Word</td>
+                    <td></td>
+                    <td>192.168.0.2</td>
+                </tr>
+                <tr>
+                    <td>PLC_H</td>
+                    <td>A0008</td>
+                    <td>Word</td>
+                    <td></td>
+                    <td>192.168.0.2</td>
+                </tr>
+            </tbody>
+        </table>
+	</div>
+	<a href="#close-modal" rel="modal:close" class="close-modal">Close</a>
+</div>
+<!--//실제 PLC 값 찾기 팝업-->
+<!-- //popup content -->
+
+
+	
+</body>
+</html>
