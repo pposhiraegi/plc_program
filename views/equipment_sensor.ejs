@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <%- include('./partials/head') %>
+</head>
+<body>
+    <div id="wrap">
+        <header>
+            <%- include('./partials/nav') %>
+            <!-- //주메뉴 -->
+        </header>
+        <section>
+            <div class="inner_wrap">
+                <div class="cont_title_wrap">
+                    <h3>설비&middot;센서 관리</h3>
+                    <p><span class="location_home">홈</span><span class="location_arrow">설비&middot;센서</span><span>설비&middot;센서 관리</span></p>
+                </div>
+            </div>
+            <!-- 버튼 -->
+            <div class="btn_area">
+                <div class="inner_wrap" >
+                    <a href="#popup1" rel="modal:open" class="btn_dark_blue">등록</a>
+                    <a href="#popup1" rel="modal:open" class="btn_blue">수정</a>
+                    <a href="#" class="btn_dark_gray">삭제</a>
+                </div>
+            </div>
+            <!-- //버튼 -->
+            <!-- 테이블 -->
+            <div class="table_wrap">
+                <div class="inner_wrap">
+                    <div class="scroll">
+                        <form method="get" action="">
+                            <legend>설비&middot;센서 리스트 폼</legend>
+                            <fieldset>
+                                <table summary="" class="tb_style_01">
+                                    <caption></caption>
+                                    <colgroup>
+                                        <col style="width:5%;" />
+                                        <col style="width:25%;" />
+                                        <col style="width:auto;" />
+                                        <col style="width:15%;" />
+                                        <col style="width:15%;" />
+                                    </colgroup>
+                                    <thead>
+                                        <tr>
+                                            <th scope="col"><input type="checkbox" name="" id=""></th>
+                                            <th scope="col">설비</th>
+                                            <th scope="col">센서</th>
+                                            <th scope="col">기간</th>
+                                            <th scope="col">사용여부</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="pagination">
+                        <ul>
+                            <li class="pg-btn"><a href="#"><img src="images/icon_first.gif" alt="처음 페이지로"></a></li>
+                            <li class="pg-btn"><a href="#"><img src="images/icon_prev.gif" alt="이전 페이지로"></a></li>
+                            <li class="active"><a href="#">1</a></li>
+                            <li><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#">4</a></li>
+                            <li><a href="#">5</a></li>
+                            <li><a href="#">6</a></li>
+                            <li><a href="#">7</a></li>
+                            <li><a href="#">8</a></li>
+                            <li><a href="#">9</a></li>
+                            <li><a href="#">10</a></li>
+                            <li class="pg-btn"><a href="#"><img src="images/icon_next.gif" alt="다음 페이지로"></a></li>
+                            <li class="pg-btn"><a href="#"><img src="images/icon_last.gif" alt="마지막 페이지로"></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- //테이블 -->
+        </section>
+        
+    </div>
+    <footer>
+        <div class="inner_wrap">
+            <p>Copyright (c) 2021 all Rights reserved. PLC Program</p>
+        </div>
+    </footer>
+    
+    <!-- popup content -->
+    <!--설비&middot;센서 등록 팝업-->
+    <div class="modal" id="popup1" style="display:none;">
+        <h3>설비&middot;센서 등록</h3>
+        <div class="popup_cont">
+            <form method="get" action="">
+                <legend>설비&middot;센서 등록 폼</legend>
+                <fieldset>
+                    <table summary="" class="tb_style_modify">
+                        <caption>설비&middot;센서 등록</caption>
+                        <colgroup>
+                            <col style="width:15%" />
+                            <col style="width:auto;" />
+                        </colgroup>
+                        <tbody>
+                            <tr>
+                                <th scope="row"><label for="">설비 이름</label></th>
+                                <td><input type="text" name="" id="" value="" placeholder="설비 이름" class="text half_wd" /></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="">상세 설명</label></th>
+                                <td><textarea name="" id="" rows="10" class="text full_wd"></textarea></td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="">센서 등록</label></th>
+                                <td>
+                                    <div class="column_wrap">
+                                        <p class="column_margin">
+                                            <input type="text" name="" id="" value="" placeholder="센서이름" class="text middle_wd" /> 
+                                            <input type="text" name="" id="" value="" placeholder="단위" class="text middle_wd" />
+                                            <a href="#" class="btn_add"><i class="fas fa-plus-square"></i></a>
+                                            <a href="#" class="btn_del"><i class="fas fa-minus-square"></i></a>
+                                        </p>
+                                        <p class="column_margin">
+                                            <input type="text" name="" id="" value="" placeholder="센서이름" class="text middle_wd" /> 
+                                            <input type="text" name="" id="" value="" placeholder="단위" class="text middle_wd" />
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="">위치(GPS)</label></th>
+                                <td>
+                                    <div class="column_wrap">
+                                        <p class="column_margin">
+                                            <input type="text" name="" id="" value="" placeholder="Lat" class="text middle_wd" /> 
+                                            <input type="text" name="" id="" value="" placeholder="Lng" class="text middle_wd" />
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="">권한 설정</label></th>
+                                <td>
+                                    <div class="column_wrap">
+                                        <p class="column_margin">
+                                            <input type="text" name="" id="" value="" placeholder="그룹명" class="text middle_wd" /> 
+                                            <a href="#" class="btn_add"><i class="fas fa-plus-square"></i></a>
+                                            <a href="#" class="btn_del"><i class="fas fa-minus-square"></i></a>
+                                        </p>
+                                        <p class="column_margin">
+                                            <input type="text" name="" id="" value="" placeholder="그룹명" class="text middle_wd" /> 
+                                        </p>
+                                    </div>
+                                </td>
+                            </tr>		
+                        </tbody>
+                    </table>
+                </fieldset>
+            </form>
+            <div class="pop_btn_area">
+                <a href="#" class="btn_pop_blue">등록</a>
+                <a href="#close-modal" rel="modal:close" class="btn_pop_gray">닫기</a>
+            </div>
+        </div>
+        <a href="#close-modal" rel="modal:close" class="close-modal">Close</a>
+    </div>
+    <!--//설비&middot;센서 등록 팝업-->
+    
+    
+    
+    <!-- //popup content -->
+    
+    
+        
+    </body>
+    </html>
