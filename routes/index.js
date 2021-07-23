@@ -3,6 +3,7 @@ const db = require('../db/config')
 
 var router = express.Router()
 
+
 //로그인
 router.get('/', (req, res, next) => {
     res.render('login')
@@ -21,6 +22,8 @@ router.post('/', function (req, res) {
 
     });
 });
+
+
 //회원가입
 router.get('/join', (req, res, next) => {
     res.render('join')
