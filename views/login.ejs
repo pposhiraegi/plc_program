@@ -14,16 +14,16 @@
 		<div class="login_box_wrap">
 			<h3>MEMEBERS <span>LOGIN</span></h3>
 			<p class="img_login" ><img src="images/img_login.png" alt="" /></p>
-			<form action="" class="login_form">
+			<form action="/" method ='post' class="login_form">
 				<fieldset>
 					<legend>로그인 폼</legend>
-					<p><input type="text" name = user_email placeholder="E-Mail" /></p>
-					<p><input type="password" name = user_password placeholder="PASSWORD" /></p>
+					<p><input type="text" name = "user_email" placeholder="E-Mail" /></p>
+					<p><input type="password" name = "user_password" placeholder="PASSWORD" /></p>
 					<div class="alert_wrap">
 						<p class="fl"><label for="user_save"><input type="checkbox" name="user_save" id="user_save" class="check" />기본정보 저장</label>	</p>
 						<p class="fr alert_txt">비밀번호가 틀렸습니다.</p>
 					</div>
-					<input type = 'submit' class="btn_login">LOGIN</a>
+					<input type ="submit" value= "login" class="btn_login">
 					<p class="btn_member"><a href="/join">회원가입</a></p>
 				</fieldset>
 			</form>
