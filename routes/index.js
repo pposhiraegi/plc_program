@@ -51,6 +51,7 @@ router.post('/join', (req, res, next) => {
         }
     })
 })
+
 //
 router.get('/plc_list', (req, res, next) => {
     res.render('plc_list')
@@ -59,6 +60,12 @@ router.get('/plc_list', (req, res, next) => {
 router.get('/plc', (req, res, next) => {
     res.render('plc')
 })
+router.post('/plc', (req, res, next) => {
+    var sql = 'select '
+    res.render('plc')
+})
+
+//변환된 설비/센서 리스트
 router.get('/equipment_sensor_list', (req, res, next) => {
     var equipment_name = req.body.equipment_name
     var equipment_date = req.body.equipment_date
@@ -68,9 +75,7 @@ router.get('/equipment_sensor_list', (req, res, next) => {
 
     var params = [equipment_name,sensor_name,sensor_value,equipment_date,equipment_use]
 
-    // sql = 'insert into equipment_sensor_list (equipment_list_id,equipment_list_name,equipment_list_sensor,equipment_list_use,equipment_list_date) select '
-
-    sql = 'select equipment_name, concat(sensor_name,"(",sensor_value,")") as sensor,equipment_date,equipment_use from equipment_sensor_info inner join sensor_info on equipment_sensor_info.equipment_id = sensor_info.equipment_id'
+    var sql = 'select equipment_name, concat(sensor_name,"(",sensor_value,")") as sensor,equipment_date,equipment_use from equipment_sensor_info inner join sensor_info on equipment_sensor_info.equipment_id = sensor_info.equipment_id'
 
     db. query(sql, params,(err,rows)=>{
         if(err)
@@ -81,22 +86,47 @@ router.get('/equipment_sensor_list', (req, res, next) => {
             res.render('equipment_sensor_list',obj)
         }
     })
+
+    db.query('select count(*) from equipment_sensor_info inner join sensor_info on equipment_sensor_info.equipment_id = sensor_info.equipment_id',params,(err,rows)=>{
+        console.log(rows)
+    })
 })
 
+//설비/센서 리스트
 router.get('/equipment_sensor', (req, res, next) => {
-    res.render('equipment_sensor')
+    var equipment_name = req.body.equipment_name
+    var equipment_date = req.body.equipment_date
+    var equipment_use = req.body.equipment_use
+    var sensor_name = req.body.sensor_name
+    var sensor_value = req.body.sensor_value
+
+    var params = [equipment_name,sensor_name,sensor_value,equipment_date,equipment_use]
+
+    var sql = 'select equipment_name, concat(sensor_name,"(",sensor_value,")") as sensor,equipment_date,equipment_use from equipment_sensor_info inner join sensor_info on equipment_sensor_info.equipment_id = sensor_info.equipment_id'
+
+    db. query(sql, params,(err,rows)=>{
+        if(err)
+            console.log(err)
+        else {
+            console.log(rows)
+            var obj = { "title": "plc 리스트", "rows": rows };
+            res.render('equipment_sensor',obj)
+        }
+    })
 })
 
+//설비/센서 등록
 router.post('/equipment_sensor', (req, res, next) => {
     var equipment_name = req.body.equipment_name
     var equipment_comment = req.body.equipment_comment
     var equipment_location_lat = req.body.equipment_location_lat
     var equipment_loaction_lng = req.body.equipment_loaction_lng
+    var equipment_date = req.body.equipment_date
+    var equipment_use = req.body.equipment_use
 
     var sensor_name = req.body.sensor_name
     var sensor_value = req.body.sensor_value
     var sensor_measure = req.body.sensor_measure
-
 
     var equipment_sql = 'insert into equipment_sensor_info (equipment_id, equipment_name, equipment_comment, equipment_location_lat, equipment_loaction_lng,equipment_date) value (0,?,?,?,?,now())'
 
@@ -105,7 +135,7 @@ router.post('/equipment_sensor', (req, res, next) => {
     var equipment_params = [equipment_name, equipment_comment, equipment_location_lat, equipment_loaction_lng]
     var sensor_params = [sensor_name, sensor_measure, sensor_value]
 
-    db.query(equipment_sql, equipment_params, (err, rows, fields) => {
+    db.query(equipment_sql, equipment_params, (err, rows) => {
         if (err)
             console.log(err)
         else {
@@ -114,12 +144,11 @@ router.post('/equipment_sensor', (req, res, next) => {
         }
     })
     
-    db.query(sensor_sql, sensor_params, (err, rows, fields) => {
+    db.query(sensor_sql, sensor_params, (err, rows) => {
         if (err)
             console.log(err)
         else {
             console.log(rows)
-            res.render('equipment_sensor')
         }
     })
 

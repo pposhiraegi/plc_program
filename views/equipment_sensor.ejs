@@ -32,7 +32,7 @@
             <div class="table_wrap">
                 <div class="inner_wrap">
                     <div class="scroll">
-                        <form method="get" action="">
+                        <form method="GET" action="/equipment_sensor">
                             <legend>설비&middot;센서 리스트 폼</legend>
                             <fieldset>
                                 <table summary="" class="tb_style_01">
@@ -52,28 +52,21 @@
                                             <th scope="col">기간</th>
                                             <th scope="col">사용여부</th>
                                         </tr>
+                                        <% for(var i=0; i<rows.length; i++) { 
+                                            var row = rows[i];
+                                        %>
+                                        <tr>
+                                            <td><input type="checkbox" name="" id=""></td>
+                                            <td><%= row.equipment_name%></td>
+                                            <td><%= row.sensor%></td>
+                                            <td><%= row.equipment_date%></td>
+                                            <td><%= row.equipment_use%></td>
+                                        </tr>
+                                    <% } %>
                                     </thead>
                                 </table>
                             </fieldset>
                         </form>
-                    </div>
-                    <div class="pagination">
-                        <ul>
-                            <li class="pg-btn"><a href="#"><img src="images/icon_first.gif" alt="처음 페이지로"></a></li>
-                            <li class="pg-btn"><a href="#"><img src="images/icon_prev.gif" alt="이전 페이지로"></a></li>
-                            <li class="active"><a href="#">1</a></li>
-                            <li><a href="#">2</a></li>
-                            <li><a href="#">3</a></li>
-                            <li><a href="#">4</a></li>
-                            <li><a href="#">5</a></li>
-                            <li><a href="#">6</a></li>
-                            <li><a href="#">7</a></li>
-                            <li><a href="#">8</a></li>
-                            <li><a href="#">9</a></li>
-                            <li><a href="#">10</a></li>
-                            <li class="pg-btn"><a href="#"><img src="images/icon_next.gif" alt="다음 페이지로"></a></li>
-                            <li class="pg-btn"><a href="#"><img src="images/icon_last.gif" alt="마지막 페이지로"></a></li>
-                        </ul>
                     </div>
                 </div>
             </div>
@@ -124,14 +117,6 @@
                                                 class="text middle_wd" />
                                             <a href="#" class="btn_add"><i class="fas fa-plus-square"></i></a>
                                             <a href="#" class="btn_del"><i class="fas fa-minus-square"></i></a>
-                                        </p>
-                                        <p class="column_margin">
-                                            <input type="text" name="sensor_name" id="sensor_name" value="" placeholder="센서이름"
-                                                class="text middle_wd" />
-                                            <input type="text" name="sensor_value" id="sensor_value" value="" placeholder="값"
-                                                class="text middle_wd" />
-                                            <input type="text" name="sensor_measure" id="sensor_measure" value="" placeholder="단위"
-                                                class="text middle_wd" />
                                         </p>
                                     </div>
                                 </td>
