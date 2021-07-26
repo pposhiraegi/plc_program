@@ -70,18 +70,17 @@ router.get('/equipment_sensor_list', (req, res, next) => {
 
     // sql = 'insert into equipment_sensor_list (equipment_list_id,equipment_list_name,equipment_list_sensor,equipment_list_use,equipment_list_date) select '
 
-    sql = 'select equipment_name, concat(sensor_name,"(",sensor_value,")") as sensor,equipment_date,equipment_use from equipment_sensor_info inner join sensor_info on equipment_sensor_id.equipment_id = sensor_info.equipment_id'
+    sql = 'select equipment_name, concat(sensor_name,"(",sensor_value,")") as sensor,equipment_date,equipment_use from equipment_sensor_info inner join sensor_info on equipment_sensor_info.equipment_id = sensor_info.equipment_id'
 
-    db. query(sql, params,(err,rows,fields)=>{
+    db. query(sql, params,(err,rows)=>{
         if(err)
             console.log(err)
         else {
             console.log(rows)
-            res.render('/equipment_sensor_list',{rows:rows})
+            var obj = { "title": "plc 리스트", "rows": rows };
+            res.render('equipment_sensor_list',obj)
         }
     })
-    
-    res.render('equipment_sensor_list')
 })
 
 router.get('/equipment_sensor', (req, res, next) => {

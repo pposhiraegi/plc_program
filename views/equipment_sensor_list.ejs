@@ -35,16 +35,17 @@
                                     <th scope="col">기간</th>
                                     <th scope="col">사용여부</th>
                                 </tr>
-                            </thead>
-                            <% for (var i=0; i<rows.length; i++){
+                                <% for(var i=0; i<1; i++) { 
+                                    var row = rows[i];
                                 %>
                                 <tr>
-                                    <td><%=rows[i].equipment_name></td>
-                                    <td><%=rows[i].sensor></td>
-                                    <td><%=rows[i].equipment_date></td>
-                                    <td><%=rows[i].equipment_use></td>
+                                    <td><%= row.equipment_name%></td>
+                                    <td><%= row.sensor%></td>
+                                    <td><%= row.equipment_date%></td>
+                                    <td><%= row.equipment_use%></td>
                                 </tr>
                             <% } %>
+                            </thead>
                         </table>
                     </div>
                 </div>
