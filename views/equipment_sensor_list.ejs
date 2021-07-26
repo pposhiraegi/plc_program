@@ -36,6 +36,15 @@
                                     <th scope="col">사용여부</th>
                                 </tr>
                             </thead>
+                            <% for (var i=0; i<rows.length; i++){
+                                %>
+                                <tr>
+                                    <td><%=rows[i].equipment_name></td>
+                                    <td><%=rows[i].sensor></td>
+                                    <td><%=rows[i].equipment_date></td>
+                                    <td><%=rows[i].equipment_use></td>
+                                </tr>
+                            <% } %>
                         </table>
                     </div>
                 </div>

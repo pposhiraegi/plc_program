@@ -1,0 +1,68 @@
+USE plc;
+
+CREATE TABLE plc_info(
+plc_id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+plc_name VARCHAR(20) NOT NULL DEFAULT 'A',
+plc_driver VARCHAR(20) NOT NULL DEFAULT 'Modbus Server',
+plc_connect VARCHAR(20) NOT NULL DEFAULT '',
+plc_ip VARCHAR(20) NOT NULL DEFAULT '111.111.111.111' ,
+plc_port INT(10) NOT NULL DEFAULT '1111',
+plc_protocol VARCHAR(20) NOT NULL DEFAULT 'ModbusTCP',
+plc_date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE user_info(
+user_id INT(10) AUTO_INCREMENT PRIMARY KEY,
+user_name VARCHAR(10) NOT NULL DEFAULT 'AAA',
+user_email VARCHAR(20) NOT NULL DEFAULT 'AAA@naver.com',
+user_password VARCHAR(20) NOT NULL DEFAULT '1111',
+user_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE plc_value(
+plc_value_id INT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+plc_value_function_code VARCHAR(20) NOT NULL DEFAULT 'AA',
+plc_value_address VARCHAR(20) NOT NULL DEFAULT '0000',
+plc_value_first_address INT(20) NOT NULL DEFAULT '0',
+plc_value_last_address INT(20) NOT NULL DEFAULT '0'
+);
+
+CREATE TABLE plc_data(
+plc_data_id INT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+plc_data_name VARCHAR(20) NOT NULL DEFAULT 'AA',
+plc_data_number INT(20) NOT NULL DEFAULT '0',
+plc_data_ip VARCHAR(20) NOT NULL DEFAULT '111.111.111.111' ,
+plc_data_port INT(20) NOT NULL DEFAULT '9999'
+plc_data_payload VARCHAR(20) NOT NULL DEFAULT 'AAA',
+plc_data_bit VARCHAR(20) NOT NULL DEFAULT 'A',
+plc_data_protocol VARCHAR(20) NOT NULL DEFAULT 'ModbusTCP',
+plc_data_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE equipment_sensor_list(
+equipment_list_id INT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+equipment_list_name VARCHAR(20) NOT NULL DEFAULT '',
+equipment_list_sensor VARCHAR(20) NOT NULL DEFAULT '',
+equipment_list_use VARCHAR(20) NOT NULL DEFAULT 'Y',
+equipment_list_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);sensor_info
+
+CREATE TABLE sensor_info(
+sensor_id INT(20) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+sensor_name VARCHAR(20) NOT NULL DEFAULT "",
+sensor_measure VARCHAR(20) NOT NULL DEFAULT "",
+sensor_value INT(20) NOT NULL DEFAULT "0",
+equipment_id INT(20) NOT NULL,
+FOREIGN KEY (equipment_id) REFERENCES equipment_sensor_info (equipment_id)
+);
+
+CREATE TABLE `equipment_sensor_info` (
+	`equipment_id` INT(20) NOT NULL AUTO_INCREMENT,
+	`equipment_name` VARCHAR(20) NOT NULL DEFAULT '' COLLATE 'latin1_swedish_ci',
+	`equipment_comment` VARCHAR(20) NOT NULL DEFAULT 'use test' COLLATE 'latin1_swedish_ci',
+	`equipment_location_lat` INT(20) NOT NULL DEFAULT '0',
+	`equipment_loaction_lng` INT(20) NOT NULL DEFAULT '0',
+	`equipment_use` VARCHAR(4) NOT NULL DEFAULT 'Y' COLLATE 'latin1_swedish_ci',
+	`equipment_date` DATETIME NOT NULL DEFAULT current_timestamp(),
+	PRIMARY KEY (`equipment_id`) USING BTREE
+)
