@@ -57,6 +57,18 @@
 					                    <th scope="col">Bit/Word</th>
 					                    <th scope="col">Protocol</th>
 					                </tr>
+									<% for(var i=0; i<rows.length; i++) { var row=rows[i]; %>
+										<tr>
+											<td><input type="checkbox" name="row[]" id="" value="%=row"></td>
+											<td><%= row.PLC%></td>
+											<td><%= row.국번%></td>
+											<td><%= row.IP%></td>
+											<td><%= row.PORT%></td>
+											<td><%= row.Payload%></td>
+											<td><%= row.Bit_word%></td>
+											<td><%= row.Protocol%></td>
+										</tr>
+									<% } %>
 					            </thead>
 					        </table>
 					    </fieldset>
@@ -86,11 +98,7 @@
 	</section>
 	
 </div>
-<footer>
-	<div class="inner_wrap">
-		<p>Copyright (c) 2021 all Rights reserved. PLC Program</p>
-	</div>
-</footer>
+<%- include('./partials/footer') %>
 
 <!-- popup content -->
 <!--PLC 등록 팝업-->
@@ -138,11 +146,11 @@
 		                    <td>
 		                        <div class="column_wrap">
                                     <p class="column_margin">
-                                        <select name="" id="" class="text middle_wd">
-                                            <option value="">Read coils (01)</option>
-                                            <option value="">Read discrete inputs(02)</option>
-                                            <option value="">Read holding registers(03)</option>
-                                            <option value="">Read input registers(04)</option>
+                                        <select name="plc_function_code" id="" class="text middle_wd">
+                                            <option value="1">Read coils (01)</option>
+                                            <option value="2">Read discrete inputs(02)</option>
+                                            <option value="3">Read holding registers(03)</option>
+                                            <option value="4">Read input registers(04)</option>
                                         </select>
                                         <input type="text" name="" id="" value="" placeholder="Address" class="text short_wd" /> 
                                         <input type="text" name="" id="" value="" placeholder="시작 자리 수" class="text short_wd" />

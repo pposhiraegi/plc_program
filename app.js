@@ -1,11 +1,11 @@
-var express = require('express')
-var path = require('path')
-var morgan = require('morgan')
-var cookieParser = require('cookie-parser')
-var bodyParser = require('body-parser')
+const express = require('express')
+const path = require('path')
+const morgan = require('morgan')
+const cookieParser = require('cookie-parser')
+const bodyParser = require('body-parser')
 
-var index = require('./routes/index')
-var app = express()
+const index = require('./routes/index')
+const app = express()
 
 app.set('views', path.join(__dirname,'views'))
 app.set('view engine','ejs')
@@ -33,5 +33,31 @@ app.use(function(err,req,res,next){
 
 app.listen(3000)
 console.log('Server start....')
+
+
+// --ModbusTCP--//
+const Modbus = require('jsmodbus')
+const net = require('net')
+const socket = new net.Socket()
+const client = new Modbus.client.TCP(socket)
+const d = require('events').EventEmitter.defaultMaxListeners=3;
+
+const options = {
+'host' : 'localhost',
+'port' : 502
+}
+
+socket.connect(options)
+
+var time
+
+time = setInterval(function(){
+    socket.on('connect',function () {
+        client.readInputRegisters(0,2).then(function (resp){
+            console.log(resp)
+        },console.error)
+    },5000)
+})
+
 
 module.exports = app

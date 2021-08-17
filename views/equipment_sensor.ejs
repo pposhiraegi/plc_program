@@ -52,17 +52,23 @@
                                             <th scope="col">기간</th>
                                             <th scope="col">사용여부</th>
                                         </tr>
-                                        <% for(var i=0; i<rows.length; i++) { 
-                                            var row = rows[i];
-                                        %>
-                                        <tr>
-                                            <td><input type="checkbox" name="" id=""></td>
-                                            <td><%= row.equipment_name%></td>
-                                            <td><%= row.sensor%></td>
-                                            <td><%= row.equipment_date%></td>
-                                            <td><%= row.equipment_use%></td>
-                                        </tr>
-                                    <% } %>
+                                        <% for(var i=0; i<rows.length; i++) { var row=rows[i]; %>
+                                            <tr>
+                                                <td><input type="checkbox" name="row[]" id="" value="%=row"></td>
+                                                <td>
+                                                    <%= row.equipment_name%>
+                                                </td>
+                                                <td>
+                                                    <%= row.sensor%>
+                                                </td>
+                                                <td>
+                                                    <%= row.equipment_date%>
+                                                </td>
+                                                <td>
+                                                    <%= row.equipment_use%>
+                                                </td>
+                                            </tr>
+                                            <% } %>
                                     </thead>
                                 </table>
                             </fieldset>
@@ -74,11 +80,7 @@
         </section>
 
     </div>
-    <footer>
-        <div class="inner_wrap">
-            <p>Copyright (c) 2021 all Rights reserved. PLC Program</p>
-        </div>
-    </footer>
+    <%- include('./partials/footer') %>
 
     <!-- popup content -->
     <!--설비&middot;센서 등록 팝업-->

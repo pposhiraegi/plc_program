@@ -23,7 +23,7 @@
 				<fieldset>
 					<div class="inner_wrap">
 						<div class="search_right">	
-							<input type="text" name="" id="" value="" placeholder="PLC 이름을 입력해 주세요." class="search_input" />
+							<input type="text" name="" id="keyword" value="" placeholder="PLC 이름을 입력해 주세요." class="search_input" />
 							<a href="#" class="btn_search">조회</a>
 						</div>
 					</div>
@@ -35,19 +35,21 @@
 		<div class="table_wrap">
 			<div class="inner_wrap">
 				<div class="scroll">
-					<table summary="" class="tb_style_01">
+					<table id="plc_table" class="tb_style_01">
 						<caption></caption>
 						<colgroup>
 							<col style="width:10%;" />
 							<col style="width:10%;" />
-							<col style="width:20%;" />
 							<col style="width:10%;" />
-							<col style="width:15;" />
 							<col style="width:10%;" />
-							<col style="width:auto" />
+							<col style="width:10%;" />
+							<col style="width:auto;" />
+							<col style="width:10%;" />
+							<col style="width:10%" />
 						</colgroup>
 						<thead>
 							<tr>
+								<th scope="col"><input type="checkbox" name="" id=""></th>
 								<th scope="col">PLC</th>
 								<th scope="col">국번</th>
 								<th scope="col">IP</th>
@@ -56,6 +58,19 @@
 								<th scope="col">Bit/Word</th>
 								<th scope="col">Protocol</th>
 							</tr>
+							<% for(var i=0; i<rows.length; i++) { var row=rows[i]; %>
+								<tr>
+									<td><input type="checkbox" name="row[]" id="" value="%=row"></td>
+									<td><%= row.PLC%></td>
+									<td><%= row.국번%></td>
+									<td><%= row.IP%></td>
+									<td><%= row.PORT%></td>
+									<td><%= row.Payload%></td>
+									<td><%= row.Bit_word%></td>
+									<td><%= row.Protocol%></td>
+								</tr>
+							<% } %>
+
 						</thead>
 					</table>
 				</div>
@@ -66,10 +81,6 @@
 	</section>
 	
 </div>
-<footer>
-	<div class="inner_wrap">
-		<p>Copyright (c) 2021 all Rights reserved. PLC Program</p>
-	</div>
-</footer>
+<%- include('./partials/footer') %>
 </body>
 </html>

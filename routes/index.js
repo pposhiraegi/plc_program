@@ -1,4 +1,5 @@
 var express = require('express')
+const { render } = require('../app')
 const db = require('../db/config')
 
 var router = express.Router()
@@ -17,7 +18,7 @@ router.post('/', function (req, res) {
     db.query(sql, params, (error, rows, fields) => {
         if (rows[0].user_email === user_email && rows[0].user_password === user_password) {
             console.log(rows[0])
-            res.render('plc')
+            res.render('plc_list')
         }
 
     });
@@ -52,18 +53,76 @@ router.post('/join', (req, res, next) => {
     })
 })
 
-//
-router.get('/plc_list', (req, res, next) => {
-    res.render('plc_list')
+router.get('/plc_list',(req,res,next)=>{
+    var plc_name = req.body.plc_name
+    var plc_number = req.body.plc_number
+    var plc_ip = req.body.plc_ip
+    var plc_port = req.body.plc_port
+    var plc_payload = req.body.plc_payload
+    var plc_value_function_code = req.body.plc_value_function_code
+    var plc_protocol =req.body.plc_protocol
+
+    var params = [plc_name,plc_number,plc_ip,plc_port,plc_payload ,plc_value_function_code,plc_protocol]
+
+    var sql ='SELECT plc_name AS PLC, plc_number AS 국번,plc_ip AS IP, plc_port AS PORT, plc_payload AS Payload,plc_value_function_code AS Bit_word,plc_protocol AS Protocol FROM plc_info INNER JOIN plc_value ON plc_info.plc_id = plc_value.plc_id'
+
+    db.query(sql, params,(err,rows)=>{
+        if(err)
+            console.log(err)
+        else{
+            console.log(rows)
+            res.render('plc_list',{"rows":rows})
+        }
+    })
 })
 
-router.get('/plc', (req, res, next) => {
-    res.render('plc')
+router.get('/plc',(req,res,next)=>{
+    var plc_name = req.body.plc_name
+    var plc_number = req.body.plc_number
+    var plc_ip = req.body.plc_ip
+    var plc_port = req.body.plc_port
+    var plc_payload = req.body.plc_payload
+    var plc_value_function_code = req.body.plc_value_function_code
+    var plc_protocol =req.body.plc_protocol
+
+    var params = [plc_name,plc_number,plc_ip,plc_port,plc_payload ,plc_value_function_code,plc_protocol]
+
+    var sql ='SELECT plc_name AS PLC, plc_number AS 국번,plc_ip AS IP, plc_port AS PORT, plc_payload AS Payload,plc_value_function_code AS Bit_word,plc_protocol AS Protocol FROM plc_info INNER JOIN plc_value ON plc_info.plc_id = plc_value.plc_id'
+
+    db.query(sql, params,(err,rows)=>{
+        if(err)
+            console.log(err)
+        else{
+            console.log(rows)
+            res.render('plc',{"rows":rows})
+        }
+    })
 })
-router.post('/plc', (req, res, next) => {
-    var sql = 'select '
-    res.render('plc')
-})
+
+// router.post('/plc', (req, res, next) => {
+//     var plc_name = req.body.plc_name
+//     var plc_number = req.body.plc_number
+//     var plc_ip = req.body.plc_ip
+//     var plc_port = req.body.plc_port
+//     var plc_value_function_code = req.body.plc_value_function_code
+//     var plc_values = req.body.plc_values
+//     var plc_protocol =req.body.plc_protocol
+
+//     console(req.body)
+
+//     var params = [plc_name,plc_number,plc_ip,plc_port,plc_value_function_code,plc_values,plc_protocol]
+
+//     var sql ='SELECT plc_name, plc_number, plc_ip, plc_port, CONCAT(plc_value_function_code,"/",plc_values)AS payload, case when plc_value_function_code = "01" then "Read Coil" END AS function_Code, plc_protocol FROM plc_info INNER JOIN plc_value ON plc_info.plc_id = plc_value.plc_id;'
+
+//     db.query(sql, params,(err,rows)=>{
+//         if(err)
+//             console.log(err)
+//         else{
+//             console.log(rows)
+//             res.render('plc',{"rows":rows})
+//         }
+//     })
+// })
 
 //변환된 설비/센서 리스트
 router.get('/equipment_sensor_list', (req, res, next) => {
@@ -81,8 +140,8 @@ router.get('/equipment_sensor_list', (req, res, next) => {
         if(err)
             console.log(err)
         else {
-            console.log(rows)
             var obj = { "title": "plc 리스트", "rows": rows };
+            console.log(rows)
             res.render('equipment_sensor_list',obj)
         }
     })
@@ -108,9 +167,10 @@ router.get('/equipment_sensor', (req, res, next) => {
         if(err)
             console.log(err)
         else {
-            console.log(rows)
-            var obj = { "title": "plc 리스트", "rows": rows };
+            
+            var obj = {"rows": rows };
             res.render('equipment_sensor',obj)
+            
         }
     })
 })
@@ -130,7 +190,7 @@ router.post('/equipment_sensor', (req, res, next) => {
 
     var equipment_sql = 'insert into equipment_sensor_info (equipment_id, equipment_name, equipment_comment, equipment_location_lat, equipment_loaction_lng,equipment_date) value (0,?,?,?,?,now())'
 
-    var sensor_sql = 'insert into sensor_info (sensor_id,sensor_name,sensor_measure,sensor_value,equipment_id) value(0,?,?,?,5)'
+    var sensor_sql = 'insert into sensor_info (sensor_id,sensor_name,sensor_measure,sensor_value,equipment_id) value(0,?,?,?,last_insert_id())'
 
     var equipment_params = [equipment_name, equipment_comment, equipment_location_lat, equipment_loaction_lng]
     var sensor_params = [sensor_name, sensor_measure, sensor_value]
@@ -140,10 +200,10 @@ router.post('/equipment_sensor', (req, res, next) => {
             console.log(err)
         else {
             console.log(rows)
-            res.render('equipment_sensor')
+            res.render('equipment_sensor',{"rows": rows })
         }
     })
-    
+
     db.query(sensor_sql, sensor_params, (err, rows) => {
         if (err)
             console.log(err)
@@ -151,6 +211,6 @@ router.post('/equipment_sensor', (req, res, next) => {
             console.log(rows)
         }
     })
-
 })
+
 module.exports = router
