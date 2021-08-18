@@ -60,7 +60,7 @@
 							</tr>
 							<% for(var i=0; i<rows.length; i++) { var row=rows[i]; %>
 								<tr>
-									<td><input type="checkbox" name="row[]" id="" value="%=row"></td>
+									<td><input type="checkbox" name="row[]" id="" value=""></td>
 									<td><%= row.PLC%></td>
 									<td><%= row.국번%></td>
 									<td><%= row.IP%></td>
@@ -70,7 +70,6 @@
 									<td><%= row.Protocol%></td>
 								</tr>
 							<% } %>
-
 						</thead>
 					</table>
 				</div>

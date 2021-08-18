@@ -3,6 +3,44 @@
 
 <head>
     <%- include('./partials/head') %>
+        <script>
+
+            const div = document.getElementById('popup1');
+
+            function duplicateForm() {
+                let forms = div.getElementsByClassName('column_wrap');
+                let firstForm = forms[0];
+                let formClone = firstForm.cloneNode(true);
+                div.appendChild(formClone);
+            }
+
+            function test() {
+                // var nurl ="";
+                var obj_length = document.getElementsByName("row").length;
+
+                for (var i = 0; i < obj_length; i++) {
+                    if (document.getElementsByName("row")[i].checked == true) {
+                        alert(document.getElementsByName("row")[i].value);
+                    }
+                }
+            }
+            //             url += obj[i].value+",";
+            //         }
+            //     }
+
+            //     if (nurl.length>0){
+            //         nurl = nurl.substring(0,nurl.length-1);
+            //     }
+            //     var url = "/equipment_sensor/edit/?equipment_id="+nurl;
+            // }
+
+            function selectAll(selectAll) {
+                const checkboxes = document.getElementsByName('row');
+                checkboxes.forEach((checkbox) => {
+                    checkbox.checked = selectAll.checked;
+                })
+            }
+        </script>
 </head>
 
 <body>
@@ -23,7 +61,8 @@
             <div class="btn_area">
                 <div class="inner_wrap">
                     <a href="#popup1" rel="modal:open" class="btn_dark_blue">등록</a>
-                    <a href="#popup1" rel="modal:open" class="btn_blue">수정</a>
+                    <!-- <button onclick="test()" rel="modal:open" class="btn_blue">수정</button> -->
+                    <a href="#popup1" onclick="test()" rel="modal:open" class="btn_dark_blue">수정</a>
                     <a href="#" class="btn_dark_gray">삭제</a>
                 </div>
             </div>
@@ -39,14 +78,17 @@
                                     <caption></caption>
                                     <colgroup>
                                         <col style="width:5%;" />
-                                        <col style="width:25%;" />
+                                        <col style="width:5%;" />
+                                        <col style="width:20%;" />
                                         <col style="width:auto;" />
                                         <col style="width:15%;" />
                                         <col style="width:15%;" />
                                     </colgroup>
                                     <thead>
                                         <tr>
-                                            <th scope="col"><input type="checkbox" name="" id=""></th>
+                                            <th scope="col"><input type="checkbox" name="" id="selectall"
+                                                    onclick="selectAll(this)"></th>
+                                            <th scope="col">No</th>
                                             <th scope="col">설비</th>
                                             <th scope="col">센서</th>
                                             <th scope="col">기간</th>
@@ -54,7 +96,11 @@
                                         </tr>
                                         <% for(var i=0; i<rows.length; i++) { var row=rows[i]; %>
                                             <tr>
-                                                <td><input type="checkbox" name="row[]" id="" value="%=row"></td>
+                                                <td><input type="checkbox" name="row" id=""
+                                                        value="<%=row.equipment_id %>"></td>
+                                                <td>
+                                                    <%= row.equipment_id%>
+                                                </td>
                                                 <td>
                                                     <%= row.equipment_name%>
                                                 </td>
@@ -82,92 +128,101 @@
     </div>
     <%- include('./partials/footer') %>
 
-    <!-- popup content -->
-    <!--설비&middot;센서 등록 팝업-->
-    <div class="modal" id="popup1" style="display:none;">
-        <h3>설비&middot;센서 등록</h3>
-        <div class="popup_cont">
-            <form method="post" method= post action="/equipment_sensor">
-                <legend>설비&middot;센서 등록 폼</legend>
-                <fieldset>
-                    <table summary="" class="tb_style_modify">
-                        <caption>설비&middot;센서 등록</caption>
-                        <colgroup>
-                            <col style="width:15%" />
-                            <col style="width:auto;" />
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <th scope="row"><label for="">설비 이름</label></th>
-                                <td><input type="text" name="equipment_name" id="equipment_name" value="" placeholder="설비 이름"
-                                        class="text half_wd" /></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><label for="">상세 설명</label></th>
-                                <td><textarea name="equipment_comment" id="equipment_comment" rows="10" class="text full_wd"></textarea></td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><label for="">센서 등록</label></th>
-                                <td>
-                                    <div class="column_wrap">
-                                        <p class="column_margin">
-                                            <input type="text" name="sensor_name" id="sensor_name" value="" placeholder="센서이름"
-                                                class="text middle_wd" />
-                                            <input type="text" name="sensor_value" id="sensor_value" value="" placeholder="값"
-                                                class="text middle_wd" />
-                                            <input type="text" name="sensor_measure" id="sensor_measure" value="" placeholder="단위"
-                                                class="text middle_wd" />
-                                            <a href="#" class="btn_add"><i class="fas fa-plus-square"></i></a>
-                                            <a href="#" class="btn_del"><i class="fas fa-minus-square"></i></a>
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><label for="">위치(GPS)</label></th>
-                                <td>
-                                    <div class="column_wrap">
-                                        <p class="column_margin">
-                                            <input type="text" name="equipment_location_lat" id="equipment_location_lat" value="" placeholder="Lat"
-                                                class="text middle_wd" />
-                                            <input type="text" name="equipment_loaction_lng" id="equipment_loaction_lng" value="" placeholder="Lng"
-                                                class="text middle_wd" />
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <th scope="row"><label for="">권한 설정</label></th>
-                                <td>
-                                    <div class="column_wrap">
-                                        <p class="column_margin">
-                                            <input type="text" name="" id="" value="" placeholder="그룹명"
-                                                class="text middle_wd" />
-                                            <a href="#" class="btn_add"><i class="fas fa-plus-square"></i></a>
-                                            <a href="#" class="btn_del"><i class="fas fa-minus-square"></i></a>
-                                        </p>
-                                        <p class="column_margin">
-                                            <input type="text" name="" id="" value="" placeholder="그룹명"
-                                                class="text middle_wd" />
-                                        </p>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="pop_btn_area">
-                        <input type ="submit" value="등록" class="btn_pop_blue">
-                    </div>
-                </fieldset>
-            </form>
+        <!-- popup content -->
+        <!--설비&middot;센서 등록 팝업-->
+
+        <div class="modal" id="popup1" style="display:none;">
+            <h3>설비&middot;센서 등록</h3>
+            <div class="popup_cont">
+                <form method="post" action="/equipment_sensor">
+                    <legend>설비&middot;센서 등록 폼</legend>
+                    <fieldset>
+                        <table summary="" class="tb_style_modify">
+                            <caption>설비&middot;센서 등록</caption>
+                            <colgroup>
+                                <col style="width:15%" />
+                                <col style="width:auto;" />
+                            </colgroup>
+                            <tbody>
+                                <tr>
+                                    <th scope="row"><label for="">설비 이름</label></th>
+                                    <td><input type="text" name="equipment_name" id="equipment_name" value=""
+                                            placeholder="설비 이름" class="text half_wd" /></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label for="">상세 설명</label></th>
+                                    <td><textarea name="equipment_comment" id="equipment_comment" rows="10"
+                                            class="text full_wd"></textarea></td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label for="">센서 등록</label></th>
+                                    <td>
+                                        <div class="column_wrap" id="parah">
+                                            <p class="column_margin">
+                                                <input type="text" name="sensor_name" id="sensor_name" value=""
+                                                    placeholder="센서이름" class="text middle_wd" />
+                                                <input type="text" name="sensor_valu" id="sensor_value" value=""
+                                                    placeholder="값" class="text middle_wd" />
+                                                <input type="text" name="sensor_measure" id="sensor_measure" value=""
+                                                    placeholder="단위" class="text middle_wd" />
+                                                <!-- <a href="#" class="btn_add"><i class="fas fa-plus-square"></i></a>
+                                            <a href="#" class="btn_del"><i class="fas fa-minus-square"></i></a> -->
+                                                <button type="button" id="sensor_add" class="fas fa-plus-square"
+                                                    onclick="duplicateForm()"></button>
+                                                <button type="button" id="sensor_del" class="fas fa-minus-square"
+                                                    onclick="deleteInput()"></button>
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label for="">위치(GPS)</label></th>
+                                    <td>
+                                        <div class="column_wrap">
+                                            <p class="column_margin">
+                                                <input type="text" name="equipment_location_lat"
+                                                    id="equipment_location_lat" value="" placeholder="Lat"
+                                                    class="text middle_wd" />
+                                                <input type="text" name="equipment_loaction_lng"
+                                                    id="equipment_loaction_lng" value="" placeholder="Lng"
+                                                    class="text middle_wd" />
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="row"><label for="">권한 설정</label></th>
+                                    <td>
+                                        <div class="column_wrap">
+                                            <p class="column_margin">
+                                                <input type="text" name="" id="" value="" placeholder="그룹명"
+                                                    class="text middle_wd" />
+                                                <a href="#" class="btn_add"><i class="fas fa-plus-square"></i></a>
+                                                <a href="#" class="btn_del"><i class="fas fa-minus-square"></i></a>
+                                            </p>
+                                            <p class="column_margin">
+                                                <input type="text" name="" id="" value="" placeholder="그룹명"
+                                                    class="text middle_wd" />
+                                            </p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="pop_btn_area">
+                            <input type="submit" value="등록" class="btn_pop_blue">
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <a href="#close-modal" rel="modal:close" class="close-modal">Close</a>
         </div>
-        <a href="#close-modal" rel="modal:close" class="close-modal">Close</a>
-    </div>
-    <!--//설비&middot;센서 등록 팝업-->
+
+        <!--//설비&middot;센서 등록 팝업-->
 
 
 
-    <!-- //popup content -->
+        <!-- //popup content -->
 
 
 

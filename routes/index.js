@@ -1,5 +1,4 @@
 var express = require('express')
-const { render } = require('../app')
 const db = require('../db/config')
 
 var router = express.Router()
@@ -18,12 +17,11 @@ router.post('/', function (req, res) {
     db.query(sql, params, (error, rows, fields) => {
         if (rows[0].user_email === user_email && rows[0].user_password === user_password) {
             console.log(rows[0])
-            res.render('plc_list')
+            res.render('plc_list',{"rows":rows})
         }
 
     });
 });
-
 
 //회원가입
 router.get('/join', (req, res, next) => {
@@ -53,6 +51,7 @@ router.post('/join', (req, res, next) => {
     })
 })
 
+//
 router.get('/plc_list',(req,res,next)=>{
     var plc_name = req.body.plc_name
     var plc_number = req.body.plc_number
@@ -98,30 +97,13 @@ router.get('/plc',(req,res,next)=>{
         }
     })
 })
-
 // router.post('/plc', (req, res, next) => {
 //     var plc_name = req.body.plc_name
-//     var plc_number = req.body.plc_number
+//     var plc_driver = req.body.plc_driver
+//     var plc_connect=req.body.plc_connect
 //     var plc_ip = req.body.plc_ip
 //     var plc_port = req.body.plc_port
-//     var plc_value_function_code = req.body.plc_value_function_code
-//     var plc_values = req.body.plc_values
-//     var plc_protocol =req.body.plc_protocol
-
-//     console(req.body)
-
-//     var params = [plc_name,plc_number,plc_ip,plc_port,plc_value_function_code,plc_values,plc_protocol]
-
-//     var sql ='SELECT plc_name, plc_number, plc_ip, plc_port, CONCAT(plc_value_function_code,"/",plc_values)AS payload, case when plc_value_function_code = "01" then "Read Coil" END AS function_Code, plc_protocol FROM plc_info INNER JOIN plc_value ON plc_info.plc_id = plc_value.plc_id;'
-
-//     db.query(sql, params,(err,rows)=>{
-//         if(err)
-//             console.log(err)
-//         else{
-//             console.log(rows)
-//             res.render('plc',{"rows":rows})
-//         }
-//     })
+//     var plc_number = req.body.plc_number
 // })
 
 //변환된 설비/센서 리스트
@@ -158,10 +140,11 @@ router.get('/equipment_sensor', (req, res, next) => {
     var equipment_use = req.body.equipment_use
     var sensor_name = req.body.sensor_name
     var sensor_value = req.body.sensor_value
+    var equipment_id = req.body.equipment_id
 
-    var params = [equipment_name,sensor_name,sensor_value,equipment_date,equipment_use]
+    var params = [equipment_id,equipment_name,sensor_name,sensor_value,equipment_date,equipment_use]
 
-    var sql = 'select equipment_name, concat(sensor_name,"(",sensor_value,")") as sensor,equipment_date,equipment_use from equipment_sensor_info inner join sensor_info on equipment_sensor_info.equipment_id = sensor_info.equipment_id'
+    var sql = 'select equipment_sensor_info.equipment_id, equipment_name, concat(sensor_name,"(",sensor_value,")") as sensor,equipment_date,equipment_use from equipment_sensor_info inner join sensor_info on equipment_sensor_info.equipment_id = sensor_info.equipment_id'
 
     db. query(sql, params,(err,rows)=>{
         if(err)
@@ -169,6 +152,7 @@ router.get('/equipment_sensor', (req, res, next) => {
         else {
             
             var obj = {"rows": rows };
+            console.log(rows)
             res.render('equipment_sensor',obj)
             
         }
@@ -203,7 +187,7 @@ router.post('/equipment_sensor', (req, res, next) => {
             res.render('equipment_sensor',{"rows": rows })
         }
     })
-
+    
     db.query(sensor_sql, sensor_params, (err, rows) => {
         if (err)
             console.log(err)

@@ -35,29 +35,29 @@ app.listen(3000)
 console.log('Server start....')
 
 
-// --ModbusTCP--//
-const Modbus = require('jsmodbus')
-const net = require('net')
-const socket = new net.Socket()
-const client = new Modbus.client.TCP(socket)
-const d = require('events').EventEmitter.defaultMaxListeners=3;
+// // --ModbusTCP--//
+// const Modbus = require('jsmodbus')
+// const net = require('net')
+// const socket = new net.Socket()
+// const client = new Modbus.client.TCP(socket)
+// const d = require('events').EventEmitter.defaultMaxListeners=3;
 
-const options = {
-'host' : 'localhost',
-'port' : 502
-}
+// const options = {
+// 'host' : 'localhost',
+// 'port' : 502
+// }
 
-socket.connect(options)
+// socket.connect(options)
 
-var time
+// var time
 
-time = setInterval(function(){
-    socket.on('connect',function () {
-        client.readInputRegisters(0,2).then(function (resp){
-            console.log(resp)
-        },console.error)
-    },5000)
-})
+// time = setInterval(function(){
+//     socket.on('connect',function () {
+//         client.readInputRegisters(0,2).then(function (resp){
+//             console.log(resp)
+//         },console.error)
+//     },5000)
+// })
 
 
 module.exports = app
